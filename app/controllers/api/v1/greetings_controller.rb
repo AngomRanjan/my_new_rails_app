@@ -1,10 +1,10 @@
 class Api::V1::GreetingsController < ApplicationController
   def index
-    @greetings = Greeting.all
-    if @greetings.empty?
-      json_response({ msg: 'no greeting found' }, 400)
+    @greeting = Greeting.find_by(id: rand(1..5))
+    if @greeting
+      render json: @greeting
     else
-      render json: @greetings[rand(0...@greetings.length - 1)]
+      json_response({ msg: 'no post or user found' }, 400)
     end
   end
 end
